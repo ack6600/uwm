@@ -1,5 +1,5 @@
 .PHONY: vim clean
-CFLAGS= -g -Wall -lxcb
+CFLAGS= -g -Wall -lxcb -lxcb-keysyms
 TARGET=out/uwm
 OBJS=uwm.o
 all: $(TARGET)
