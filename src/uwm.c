@@ -113,3 +113,4 @@ void focus_next(xcb_connection_t *c, xcb_drawable_t *focus_win, xcb_window_t *wi
 	}
 	xcb_set_input_focus(c,XCB_INPUT_FOCUS_NONE,*focus_win,XCB_CURRENT_TIME);
 }
+//la la la focus
