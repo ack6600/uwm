@@ -70,34 +70,36 @@ int main(){
 }
 void move_window(xcb_drawable_t win,xcb_connection_t *c,enum direction d){
 	geom = xcb_get_geometry_reply(c,xcb_get_geometry(c,win),NULL);
-	switch(d){
-		case UP:
-			{
-				values[0] = geom->x;
-				values[1] = geom->y - STEP;
-				break;
-			}
-		case DOWN:
-			{
-				values[0] = geom->x;
-				values[1] = geom->y + STEP;
-				break;
-			}
-		case LEFT:
-			{
-				values[0] = geom->x - STEP;
-				values[1] = geom->y;
-				break;
-			}
-		case RIGHT:
-			{
-				values[0] = geom->x + STEP;
-				values[1] = geom->y;
-				break;
-			}
+	if(geom){
+		switch(d){
+			case UP:
+				{
+					values[0] = geom->x;
+					values[1] = geom->y - STEP;
+					break;
+				}
+			case DOWN:
+				{
+					values[0] = geom->x;
+					values[1] = geom->y + STEP;
+					break;
+				}
+			case LEFT:
+				{
+					values[0] = geom->x - STEP;
+					values[1] = geom->y;
+					break;
+				}
+			case RIGHT:
+				{
+					values[0] = geom->x + STEP;
+					values[1] = geom->y;
+					break;
+				}
+		}
+		xcb_configure_window(c,win,XCB_CONFIG_WINDOW_X|XCB_CONFIG_WINDOW_Y,values);
+		xcb_flush(c);
 	}
-	xcb_configure_window(c,win,XCB_CONFIG_WINDOW_X|XCB_CONFIG_WINDOW_Y,values);
-	xcb_flush(c);
 }
 xcb_window_t *get_windows(xcb_connection_t *c, xcb_window_t root,int *len){
 	xcb_query_tree_reply_t *reply = xcb_query_tree_reply(c,xcb_query_tree(c,root),0);
@@ -113,4 +115,3 @@ void focus_next(xcb_connection_t *c, xcb_drawable_t *focus_win, xcb_window_t *wi
 	}
 	xcb_set_input_focus(c,XCB_INPUT_FOCUS_NONE,*focus_win,XCB_CURRENT_TIME);
 }
-//ha didfad fbar
