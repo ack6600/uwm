@@ -5,7 +5,7 @@ OBJS=uwm.o
 all: $(TARGET)
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
-%.o: src/%.c
+%.o: src/%.c src/%.h
 	$(CC) $(CFLAGS) -c $<
 vim:
 	vim -p src/*.c src/*.h
